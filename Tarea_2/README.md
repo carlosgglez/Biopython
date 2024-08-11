@@ -1,24 +1,22 @@
 # E.search
 
-Este script de Python utiliza las bibliotecas de "Biopython" y de
-"Entrez" para hacer una consulta en la base de datos de "Pubmed", 
-regresando la siguiente información de todos los FieldList:
-    
-    - Name
-    
-    - Full Name
-    
-    - Description
+Este script de Python tiene dos funcionalidades, en ambas se utilizan las bibliotecas de "Biopython" y de "Entrez".
+Su primera funcionalidad sirve para hacer una consulta en la base de datos de "Protein", regresando la descripción del FieldList "ECNO" y la descripción del
+LinklList "protein_protein_small_genome".
         
-De igual manera, regresa la descripción del primer FieldList.
+La otra función que tiene el prgrama es de buscar en la base de 
+datos de Pubmed las entradas que hay de la Doctora Constance Auvynet,
+especificando encontrar los artículos que en el titulo mencionen algo
+sobre "peptide", "antimicrobial" o "migration".
 
 ## Uso
 
-Solo se debe de correr en una terminal que use python.
+Solo se debe de correr en una terminal en la cual se pueda utilizar python.
 
 ## Salida
 
-Imprime en pantalla la información de los FieldList de Pubmed.
+Imprime en pantalla la descripción del FieldList "ECNO" y la descripción del LinkList de "protein_protein_small_genome".
+También, genera un archivo llamado "Ids_Constance_Auvynet.md" el cual es un archivo de texto plano con extensión md o MarkDown.
 
 ## Pruebas
 
