@@ -27,19 +27,34 @@ Para resolver este problema, se utilizarán varias funciones incorporadas en Pyt
 '''
 from Bio import Entrez
 from pprint import pprint  # Mejor visualización de diccionarios
+
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-handle = Entrez.einfo(db="pubmed")
+handle = Entrez.einfo(db="protein")
 record = Entrez.read(handle)
 
-for field in record["DbInfo"]["FieldList"]:
-    print(field["Name"] + "," + field["FullName"] + "," + field["Description"])
+ECNO_campo = record['DbInfo']['FieldList'][16]
+print("\nDescripción del campo ECNO:")
+print(ECNO_campo["Description"])
 
 print("\nURL de la consulta:", handle.url)
 
-primer_campo = record['DbInfo']['FieldList'][0]
-print("\nDescripción del primer campo:")
-print(primer_campo["Description"])
+protein_campo = record['DbInfo']['LinkList'][33]
+print("\nDescripción del campo protein_protein_small_genome:")
+print(protein_campo["Description"])
+
+filename = "Id's_Constance_Auvynet.md"
+
+termino = "(Auvynet-C[AUTH]) AND ((peptide[TITLE] OR peptides[TITLE]) OR (antimicrobial[TITLE] OR migration[TITLE]))"
+
+handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
+record = Entrez.read(handle)
+
+archivo_salida = "Ids_Constance_Auvynet.md"
+with open(archivo_salida, "w") as file:
+    file.write("\n".join(record["IdList"]))
+
+print(f"\nIDs guardados en {archivo_salida}")
 
 handle.close()
 
