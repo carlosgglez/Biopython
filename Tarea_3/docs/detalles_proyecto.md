@@ -28,10 +28,8 @@ Para resolver este problema, se utilizarán varias funciones incorporadas en Pyt
 from Bio import Entrez
 from pprint import pprint  # Mejor visualización de diccionarios
 
-# Configuración del correo electrónico para Entrez (requerido por NCBI)
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-# Obtención de ID y linaje de Notoryctes typhlops
 handle = Entrez.esearch(db="Taxonomy", term="Notoryctes typhlops")
 record = Entrez.read(handle)
 print("El Id de Notoryctes typhlops es: ")
@@ -41,7 +39,6 @@ Id_Notoryctes = record["IdList"]
 handle = Entrez.efetch(db="Taxonomy", id=Id_Notoryctes, retmode="xml")
 Notoryctes = Entrez.read(handle)
 
-# Obtención de ID y linaje de Chrysochloris asiatica
 handle = Entrez.esearch(db="Taxonomy", term="Chrysochloris asiatica")
 record = Entrez.read(handle)
 print(f"\nEl Id de Chrysochloris asiatica es: ")
@@ -51,7 +48,6 @@ Id_Chryso = record["IdList"]
 handle = Entrez.efetch(db="Taxonomy", id=Id_Chryso, retmode="xml")
 Chryso = Entrez.read(handle)
 
-# Impresión de linajes
 print(f"\nLinaje de Notoryctes typhlops:")
 linaje_Notoryctes = Notoryctes[0]["Lineage"].split("; ")
 print(" > ".join(linaje_Notoryctes))
