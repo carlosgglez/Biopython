@@ -1,6 +1,6 @@
 '''
 NAME
-        Tarea 2
+        Tarea 4
 
 VERSION
         1
@@ -9,16 +9,7 @@ AUTHOR
         Carlos García González
 
 DESCRIPTION
-        Este script de Python utiliza las bibliotecas de "Biopython" y de
-        "Entrez" para hacer una consulta en la base de datos de "Protein", 
-        regresando la descripción del FieldList "ECNO" y la descripción del
-        LinklList "protein_protein_small_genome".
         
-        La otra función que tiene el prgrama es de buscar en la base de 
-        datos de Pubmed las entradas que hay de la Doctora Constance Auvynet,
-        especificando encontrar los artículos que en el titulo mencionen algo
-        sobre "peptide", "antimicrobial" o "migration".
-
 
 CATEGORY
         
