@@ -54,9 +54,6 @@ from pprint import pprint  # Mejor visualización de diccionarios
 # =                            main
 # ===========================================================================
 
-from Bio import Entrez
-from pprint import pprint
-
 # Configuracion del correo electronico para Entrez (requerido por NCBI)
 Entrez.email = "carlosgg@lcg.unam.mx"
 
