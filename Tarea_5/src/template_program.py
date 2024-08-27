@@ -1,6 +1,6 @@
 '''
 NAME
-        Tarea 1
+        Tarea 5
 
 VERSION
         1
@@ -9,14 +9,7 @@ AUTHOR
         Carlos García González
 
 DESCRIPTION
-        Este script de Python utiliza las bibliotecas de "Biopython" y de
-        "Entrez" para hacer una consulta en la base de datos de "Pubmed", 
-        regresando la siguiente información de todos los FieldList:
-            - Name
-            - Full Name
-            - Description
         
-        De igual manera, regresa la descripción del primer FieldList
 
 CATEGORY
         
@@ -30,7 +23,7 @@ ARGUMENTS
 
 
 METHOD
-    Biopython/Tarea_1
+    Biopython/Tarea_5
 
 SEE ALSO
 
@@ -51,23 +44,23 @@ from pprint import pprint  # Mejor visualización de diccionarios
 # =                            main
 # ===========================================================================
 
+# Configuracion del correo electronico para Entrez (requerido por NCBI)
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-handle = Entrez.einfo(db="pubmed")
+# Buscar en la base de datos de proteinas (protein) usando el termino DEFA y Aedes aegypti
+handle = Entrez.esearch(db = "protein", term = "DEFA[Aedes aegypti]")
 record = Entrez.read(handle)
 
-# 1. Iterar sobre todos los campos en FieldList e imprimir nombre, FullName y descripción
-for field in record["DbInfo"]["FieldList"]:
-    print(field["Name"] + "," + field["FullName"] + "," + field["Description"])
+print("Lista de Id's la informacion del gen DEFA del mosquito en la db de protein: ")
+print(record["IdList"])
 
-# Imprimir la URL de la consulta
-print("\nURL de la consulta:", handle.url)
+# Obtengo el ID de la primera proteina en los resultados de busqueda
+prot_id = record["IdList"][0]
 
-# 2. Imprimir la descripción del primer campo
-primer_campo = record['DbInfo']['FieldList'][0]
-print("\nDescripción del primer campo:")
-print(primer_campo["Description"])
-
-# Cerrar el handle después de obtener toda la información
+# Extraer el registro GenBank de la base de datos de proteinas usando el ID obtenido
+handle = Entrez.efetch(db = "protein", id = prot_id, rettype = "gb", retmode = "text")
+genbank_record = handle.read()
 handle.close()
 
+# Mostrar la informacion obtenida (o guardarla para analisis posterior)
+print(genbank_record)
