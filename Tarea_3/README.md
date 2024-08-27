@@ -1,13 +1,6 @@
 # E.search
 
-Este script de Python tiene dos funcionalidades, en ambas se utilizan las bibliotecas de "Biopython" y de "Entrez".
-Su primera funcionalidad sirve para hacer una consulta en la base de datos de "Protein", regresando la descripción del FieldList "ECNO" y la descripción del
-LinklList "protein_protein_small_genome".
-        
-La otra función que tiene el prgrama es de buscar en la base de 
-datos de Pubmed las entradas que hay de la Doctora Constance Auvynet,
-especificando encontrar los artículos que en el titulo mencionen algo
-sobre "peptide", "antimicrobial" o "migration".
+Este script de Python tiene tres funcionalidades, en estas se utilizan las bibliotecas de "Biopython" y "Entrez". La primera funcionalidad sirve para obtener los Ids taxónomicos de dos organismos. La segunda funcionalidad recupera información del organismo en base a su ID taxónomico y lo divide el linaje en una lista de categorías taxónomicas. La tercera y última función compara las categorías de los dos organismos para determinar el punto en el que ambos linajes divergen.
 
 ## Uso
 
@@ -15,8 +8,8 @@ Solo se debe de correr en una terminal en la cual se pueda utilizar python.
 
 ## Salida
 
-Imprime en pantalla la descripción del FieldList "ECNO" y la descripción del LinkList de "protein_protein_small_genome".
-También, genera un archivo llamado "Ids_Constance_Auvynet.md" el cual es un archivo de texto plano con extensión md o MarkDown.
+Imprime en la pantalla los IDs de dos organismos, los linajes de ambos en formato de una lista de categorías taxónomicas, y el punto en el que los linajes de ambos organismos divergen, indicando la última categoría que comparten y las categorías donde comienzan a diferir. 
+
 
 ## Pruebas
 
