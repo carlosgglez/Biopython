@@ -20,6 +20,7 @@ Requisitos no funcionales.
 Para resolver este problema, se utilizarán varias funciones incorporadas en Python. A continuación, se muestra un pseudocódigo simple para ilustrar la lógica básica del script:
 
 '''
+
 from Bio import Entrez
 from pprint import pprint  # Mejor visualización de diccionarios
 
