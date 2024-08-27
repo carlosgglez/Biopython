@@ -53,3 +53,12 @@ print(" > ".join(linaje_Chryso))
 
 for i in range(min(len(linaje_Notoryctes), len(linaje_Chryso))):
     if linaje_Notoryctes[i] != linaje_Chryso[i]:
+        print(f"\nLos linajes de Notoryctes typhlops y Chrysochloris asiatica divergen después de ser ambos {linaje_Notoryctes[i-1]}.")
+        print(f"Notoryctes es {linaje_Notoryctes[i]} y Chrysochloris es {linaje_Chryso[i]}.")
+        break
+else:
+    print(f"\nNotoryctes typhlops y Chrysochloris asiatica comparten el mismo linaje hasta {linaje_Notoryctes[-1]}.")
+
+handle.close()
+
+'''
