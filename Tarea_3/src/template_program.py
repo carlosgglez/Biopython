@@ -9,7 +9,13 @@ AUTHOR
         Carlos García González
 
 DESCRIPTION
-        
+        Este script de Python utiliza la biblioteca Biopython y el módulo
+        Entrez para interactuar con la base de datos “Taxonomy" del NCBI. 
+        Recopila datos taxonómicos de dos organismos usando sus IDs 
+        correspondientes, y divide la información del linaje en una lista 
+        de categorías taxonómicas para su posterior comparación. Es útil 
+        para comparar la taxonomía de dos organismos y determinar el punto 
+        exacto en el que sus linajes divergen.
 
 
 CATEGORY
