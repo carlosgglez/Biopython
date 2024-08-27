@@ -27,11 +27,9 @@ from Bio import Entrez
 from pprint import pprint
 
 Entrez.email = "carlosgg@lcg.unam.mx"
-
 termino = "(Auvynet-C[AUTH]) AND ((peptide[TITLE] OR peptides[TITLE]) OR (antimicrobial[TITLE] OR migration[TITLE]))"
 
 try:
-
     handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
     record = Entrez.read(handle)
     handle.close()  # Cierra el handle de la busqueda
@@ -77,7 +75,6 @@ try:
             print(f"IDs de los articulos citantes guardados en {filename_citations}")
         except IOError as e:
             print(f"Error al guardar el archivo de citas: {e}")
-
 except Exception as e:
     print(f"Se produjo un error: {e}")
 
