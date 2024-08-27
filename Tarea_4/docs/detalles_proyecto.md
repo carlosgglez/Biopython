@@ -29,6 +29,8 @@ from pprint import pprint
 Entrez.email = "carlosgg@lcg.unam.mx"
 termino = "(Auvynet-C[AUTH]) AND ((peptide[TITLE] OR peptides[TITLE]) OR (antimicrobial[TITLE] OR migration[TITLE]))"
 
+
+
 try:
     handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
     record = Entrez.read(handle)
