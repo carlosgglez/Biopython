@@ -1,6 +1,6 @@
-# E.search
+# Incremento en la busqueda de pubmed
 
-Fecha: 10/08/2024
+Fecha: 26/08/2024
 
 **Participantes**
 Carlos García González <email: carlosgg@lcg.unam.mx>
