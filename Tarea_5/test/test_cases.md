@@ -1,12 +1,13 @@
 # Casos de prueba o escenarios
 
-Este documento describe los casos de prueba para el script de Python desarrollado para hacer una consulta en la base de datos de "Pubmed", 
-regresando la siguiente información de todos los FieldList:
-    - Name
-    - Full Name
-    - Description
-De igual manera, imprime en pantalla de manera única la descripción del
-primer FieldList de Pubmed.
+ Este script de Python tiene dos funciones, utilizando las bibliotecas
+ de "Biopython" y el módulo "Entrez" para interactuar con la base de 
+ datos "Protein" del NCBI. La primera función realiza una búsqueda para 
+ encontrar proteínas relacionadas al gen DEFA en el mosquiro Aedes aegypti
+ e imprime en pantalla los IDs que coinciden con el término de la búsqueda.
+
+ La segunda función selecciona el primer ID y realiza una búsqueda en 
+ "GeneBank" e imprime información detallada acerca de esta.
 
 El objetivo de este archivo es validar y garantizar que el script funciona correctamente y cumple especificaciónes. 
 Al ser este un script que no necesita de la intervención del usuario, no hay casos de prueba que se deban de necesitar para su funcionamiento.
