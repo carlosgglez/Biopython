@@ -1,6 +1,6 @@
 '''
 NAME
-        Tarea 2
+        Tarea 3
 
 VERSION
         1
@@ -9,15 +9,7 @@ AUTHOR
         Carlos García González
 
 DESCRIPTION
-        Este script de Python utiliza las bibliotecas de "Biopython" y de
-        "Entrez" para hacer una consulta en la base de datos de "Protein", 
-        regresando la descripción del FieldList "ECNO" y la descripción del
-        LinklList "protein_protein_small_genome".
         
-        La otra función que tiene el prgrama es de buscar en la base de 
-        datos de Pubmed las entradas que hay de la Doctora Constance Auvynet,
-        especificando encontrar los artículos que en el titulo mencionen algo
-        sobre "peptide", "antimicrobial" o "migration".
 
 
 CATEGORY
@@ -32,7 +24,7 @@ ARGUMENTS
 
 
 METHOD
-    Biopython/Tarea_2
+    Biopython/Tarea_3
 
 SEE ALSO
 
@@ -53,43 +45,48 @@ from pprint import pprint  # Mejor visualización de diccionarios
 # =                            main
 # ===========================================================================
 
+from Bio import Entrez
+from pprint import pprint  # Mejor visualización de diccionarios
+
 # Configuración del correo electrónico para Entrez (requerido por NCBI)
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-# Consulta la base de datos "protein" para obtener información sobre los campos
-handle = Entrez.einfo(db="protein")
+# Obtención de ID y linaje de Notoryctes typhlops
+handle = Entrez.esearch(db="Taxonomy", term="Notoryctes typhlops")
 record = Entrez.read(handle)
+print("El Id de Notoryctes typhlops es: ")
+print(record["IdList"])
 
-# Obtiene la descripción del campo ECNO desde la lista de campos
-ECNO_campo = record['DbInfo']['FieldList'][16]
-print("\nDescripción del campo ECNO:")
-print(ECNO_campo["Description"])
+Id_Notoryctes = record["IdList"]
+handle = Entrez.efetch(db="Taxonomy", id=Id_Notoryctes, retmode="xml")
+Notoryctes = Entrez.read(handle)
 
-# Imprime la URL de la consulta realizada a Entrez
-print("\nURL de la consulta:", handle.url)
-
-# Obtiene la descripción del campo protein_protein_small_genome desde la lista de enlaces
-protein_campo = record['DbInfo']['LinkList'][33]
-print("\nDescripción del campo protein_protein_small_genome:")
-print(protein_campo["Description"])
-
-# Define el nombre del archivo donde se guardarán los IDs de los artículos
-filename = "Id's_Constance_Auvynet.md"
-
-# Define el término de búsqueda para PubMed, buscando artículos de un autor específico con palabras clave en el título
-termino = "(Auvynet-C[AUTH]) AND ((peptide[TITLE] OR peptides[TITLE]) OR (antimicrobial[TITLE] OR migration[TITLE]))"
-
-# Realiza la búsqueda en PubMed con el término especificado
-handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
+# Obtención de ID y linaje de Chrysochloris asiatica
+handle = Entrez.esearch(db="Taxonomy", term="Chrysochloris asiatica")
 record = Entrez.read(handle)
+print(f"\nEl Id de Chrysochloris asiatica es: ")
+print(record["IdList"])
 
-# Define el nombre del archivo de salida y guarda los IDs de los artículos encontrados
-archivo_salida = "Ids_Constance_Auvynet.md"
-with open(archivo_salida, "w") as file:
-    file.write("\n".join(record["IdList"]))
+Id_Chryso = record["IdList"]
+handle = Entrez.efetch(db="Taxonomy", id=Id_Chryso, retmode="xml")
+Chryso = Entrez.read(handle)
 
-# Imprime la confirmación de que los IDs se han guardado en el archivo
-print(f"\nIDs guardados en {archivo_salida}")
+# Impresión de linajes
+print(f"\nLinaje de Notoryctes typhlops:")
+linaje_Notoryctes = Notoryctes[0]["Lineage"].split("; ")
+print(" > ".join(linaje_Notoryctes))
 
-# Cierra el handle de la consulta para liberar recursos
+print(f"\nLinaje de Chrysochloris asiatica:")
+linaje_Chryso = Chryso[0]["Lineage"].split("; ")
+print(" > ".join(linaje_Chryso))
+
+# Revisión automática de divergencia en linajes
+for i in range(min(len(linaje_Notoryctes), len(linaje_Chryso))):
+    if linaje_Notoryctes[i] != linaje_Chryso[i]:
+        print(f"\nLos linajes de Notoryctes typhlops y Chrysochloris asiatica divergen después de ser ambos {linaje_Notoryctes[i-1]}.")
+        print(f"Notoryctes es {linaje_Notoryctes[i]} y Chrysochloris es {linaje_Chryso[i]}.")
+        break
+else:
+    print(f"\nNotoryctes typhlops y Chrysochloris asiatica comparten el mismo linaje hasta {linaje_Notoryctes[-1]}.")
+
 handle.close()
