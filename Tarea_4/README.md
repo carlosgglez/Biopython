@@ -1,4 +1,4 @@
-# E.search
+# Incremento en la busqueda de pubmed
 
 Este script de Python realiza tres funciones utilizando la biblioteca de “Biopython” y “Entrez” para interactuar con la base de datos de PubMed. 
 
