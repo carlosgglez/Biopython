@@ -1,16 +1,6 @@
-# E.search
+# Buscar el accesion de UniProt
 
-Este script de Python utiliza las bibliotecas de "Biopython" y de
-"Entrez" para hacer una consulta en la base de datos de "Pubmed", 
-regresando la siguiente información de todos los FieldList:
-    
-    - Name
-    
-    - Full Name
-    
-    - Description
-        
-De igual manera, regresa la descripción del primer FieldList.
+
 
 ## Uso
 
@@ -18,7 +8,9 @@ Solo se debe de correr en una terminal que use python.
 
 ## Salida
 
-Imprime en pantalla la información de los FieldList de Pubmed.
+Imprime en pantalla los Id's relacionados al gen DEFA del mosquito *Aedes aegypti* que se encontraron 
+en la base de datos de protein.
+Después, imprime también en pantalla el GenBak de la proteina codificada por dicho gen.
 
 ## Pruebas
 
