@@ -1,24 +1,19 @@
-# E.search
+# Busqueda y Comparacion de linajes
 
-Fecha: 10/08/2024
+Fecha: 26/08/2024
 
-**Participantes**
-Carlos García González <email: carlosgg@lcg.unam.mx>
-
-
-## Descripción del Problema
-
-El tiempo al momento de hacer una consulta en una base de datos es crucial, ya que, si bien no es mucho, se puede optimizar cuando se tienen que realizar muchas, por lo cual se desarrollo este script, tiene la finalidad de que se 
-puedan hacer las cosultas de una manera más rapida y ágil.
+**Participantes:** Carlos Garcia Gonzales  <email: carlosgg@lcg.unam.mx>
 
 
-## Especificación de Requisitos
+## Descripción del problema: 
+Al analizar dos organismos, es crucial tener una eficacia en nuestro trabajo, pero también una exactitud que no podríamos lograr manualmente, por lo que este script tiene como finalidad la entrega de nuestro trabajo en base de esos dos criterios, eficacia y exactitud. Para poder descubrir la divergencia entre ambos.
 
-Requisitos no funcionales
+## Especificación de Requisitos: 
 
-- El script debe de estar escrito en Python
-- El tiempo de respuesta debe de ser rápido, incluso si se hace una consulta grande
+Requisitos no funcionales. 
 
+- El script debe estar escrito en Python
+- El tiempo de consulta, sin importar su dimensión, debe ser rápido.
 
 ## Análisis y Diseño
 
@@ -56,19 +51,5 @@ print(f"\nLinaje de Chrysochloris asiatica:")
 linaje_Chryso = Chryso[0]["Lineage"].split("; ")
 print(" > ".join(linaje_Chryso))
 
-# Revisión automática de divergencia en linajes
 for i in range(min(len(linaje_Notoryctes), len(linaje_Chryso))):
     if linaje_Notoryctes[i] != linaje_Chryso[i]:
-        print(f"\nLos linajes de Notoryctes typhlops y Chrysochloris asiatica divergen después de ser ambos {linaje_Notoryctes[i-1]}.")
-        print(f"Notoryctes es {linaje_Notoryctes[i]} y Chrysochloris es {linaje_Chryso[i]}.")
-        break
-else:
-    print(f"\nNotoryctes typhlops y Chrysochloris asiatica comparten el mismo linaje hasta {linaje_Notoryctes[-1]}.")
-
-handle.close()
-
-'''
-
-
-
-
