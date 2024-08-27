@@ -53,43 +53,67 @@ from pprint import pprint  # Mejor visualización de diccionarios
 # =                            main
 # ===========================================================================
 
-# Configuración del correo electrónico para Entrez (requerido por NCBI)
+from Bio import Entrez
+from pprint import pprint
+
+# Configuracion del correo electronico para Entrez (requerido por NCBI)
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-# Consulta la base de datos "protein" para obtener información sobre los campos
-handle = Entrez.einfo(db="protein")
-record = Entrez.read(handle)
-
-# Obtiene la descripción del campo ECNO desde la lista de campos
-ECNO_campo = record['DbInfo']['FieldList'][16]
-print("\nDescripción del campo ECNO:")
-print(ECNO_campo["Description"])
-
-# Imprime la URL de la consulta realizada a Entrez
-print("\nURL de la consulta:", handle.url)
-
-# Obtiene la descripción del campo protein_protein_small_genome desde la lista de enlaces
-protein_campo = record['DbInfo']['LinkList'][33]
-print("\nDescripción del campo protein_protein_small_genome:")
-print(protein_campo["Description"])
-
-# Define el nombre del archivo donde se guardarán los IDs de los artículos
-filename = "Id's_Constance_Auvynet.md"
-
-# Define el término de búsqueda para PubMed, buscando artículos de un autor específico con palabras clave en el título
+# Define el termino de busqueda para PubMed, buscando articulos de un autor especifico con palabras clave en el titulo
 termino = "(Auvynet-C[AUTH]) AND ((peptide[TITLE] OR peptides[TITLE]) OR (antimicrobial[TITLE] OR migration[TITLE]))"
 
-# Realiza la búsqueda en PubMed con el término especificado
-handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
-record = Entrez.read(handle)
+try:
+    # Realiza la busqueda en PubMed con el termino especificado
+    handle = Entrez.esearch(db="pubmed", term=termino, retmax=100)
+    record = Entrez.read(handle)
+    handle.close()  # Cierra el handle de la busqueda
 
-# Define el nombre del archivo de salida y guarda los IDs de los artículos encontrados
-archivo_salida = "Ids_Constance_Auvynet.md"
-with open(archivo_salida, "w") as file:
-    file.write("\n".join(record["IdList"]))
+    print("IDs de los articulos encontrados:")
+    pprint(record["IdList"])  # Se usa pprint para una mejor visualizacion
 
-# Imprime la confirmación de que los IDs se han guardado en el archivo
-print(f"\nIDs guardados en {archivo_salida}")
+    Id_Constance = record["IdList"]
 
-# Cierra el handle de la consulta para liberar recursos
-handle.close()
+    if not Id_Constance:
+        print("No se encontraron articulos.")
+    else:
+        # Obtener los abstracts de los articulos encontrados
+        handle = Entrez.efetch(db="pubmed", id=Id_Constance, rettype="abstract", retmode="text")
+        abstracts = handle.read()
+        handle.close()  # Cierra el handle de la consulta
+
+        # Define el nombre del archivo donde se guardaran los abstracts de los articulos
+        filename_abstracts = "Abstracts_Constance_Auvynet.md"
+
+        # Guarda los abstracts en el archivo usando utf-8 para manejar caracteres Unicode
+        try:
+            with open(filename_abstracts, "w", encoding="utf-8") as file:
+                file.write(abstracts)
+            print(f"Abstracts guardados en {filename_abstracts}")
+        except IOError as e:
+            print(f"Error al guardar el archivo: {e}")
+
+        # Obtener los IDs de los articulos que citan a los articulos encontrados
+        all_citations = []
+
+        for pubmed_id in Id_Constance:
+            handle = Entrez.elink(dbfrom="pubmed", id=pubmed_id, linkname="pubmed_pubmed_citedin")
+            citation_record = Entrez.read(handle)
+            handle.close()
+
+            # Extraer los IDs de los articulos citantes
+            if citation_record[0]["LinkSetDb"]:
+                citation_ids = [link["Id"] for link in citation_record[0]["LinkSetDb"][0]["Link"]]
+                all_citations.extend(citation_ids)
+
+        # Guardar los IDs de las citas en un archivo
+        filename_citations = "Citations_Constance_Auvynet.txt"
+        try:
+            with open(filename_citations, "w", encoding="utf-8") as file:
+                for citation_id in all_citations:
+                    file.write(citation_id + "\n")
+            print(f"IDs de los articulos citantes guardados en {filename_citations}")
+        except IOError as e:
+            print(f"Error al guardar el archivo de citas: {e}")
+
+except Exception as e:
+    print(f"Se produjo un error: {e}")
