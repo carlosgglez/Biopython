@@ -8,9 +8,7 @@ Carlos García González <email: carlosgg@lcg.unam.mx>
 
 ## Descripción del Problema
 
-El tiempo al momento de hacer una consulta en una base de datos es crucial, ya que, si bien no es mucho, se puede optimizar cuando se tienen que realizar muchas, por lo cual se desarrollo este script, tiene la finalidad de que se 
-puedan hacer las cosultas de una manera más rapida y ágil.
-
+El problema principal a resolver es realizar una busqueda avanzada con etiquetas especificas, para despues generar un archivo a partir de segmentos de dichos datos y ese archivo que realize un busquedda inversa de citas que se le hayan realizado a los datos.
 
 ## Especificación de Requisitos
 
