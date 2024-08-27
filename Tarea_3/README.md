@@ -1,4 +1,4 @@
-# E.search
+# Busqueda y comparación de linajes
 
 Este script de Python tiene tres funcionalidades, en estas se utilizan las bibliotecas de "Biopython" y "Entrez". La primera funcionalidad sirve para obtener los Ids taxónomicos de dos organismos. La segunda funcionalidad recupera información del organismo en base a su ID taxónomico y lo divide el linaje en una lista de categorías taxónomicas. La tercera y última función compara las categorías de los dos organismos para determinar el punto en el que ambos linajes divergen.
 
