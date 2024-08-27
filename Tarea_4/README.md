@@ -1,13 +1,11 @@
 # E.search
 
-Este script de Python tiene dos funcionalidades, en ambas se utilizan las bibliotecas de "Biopython" y de "Entrez".
-Su primera funcionalidad sirve para hacer una consulta en la base de datos de "Protein", regresando la descripción del FieldList "ECNO" y la descripción del
-LinklList "protein_protein_small_genome".
-        
-La otra función que tiene el prgrama es de buscar en la base de 
-datos de Pubmed las entradas que hay de la Doctora Constance Auvynet,
-especificando encontrar los artículos que en el titulo mencionen algo
-sobre "peptide", "antimicrobial" o "migration".
+Este script de Python realiza tres funciones utilizando la biblioteca de “Biopython” y “Entrez” para interactuar con la base de datos de PubMed. 
+
+La primera función  busca artículos de la Dra. Constance Auvynete, utilizando ciertas palabras clave (en este caso se usan "peptide" o "antimicrobial" o "migration") del título, límita la busqueda a 100 resultados e imprime en pantalla los IDs de los artículos que coinciden con el término de la búsqueda. 
+
+La segunda función recupera los abstracts (resúmenes) de los artículos que coinciden y los guarda en un archivo. La tercera y última función  busca artículos en PubMed que citen a los artículos encontrados en la búsqueda inicial, los IDs de los artículos citantes se extraen y se almacenan en un archivo.  
+
 
 ## Uso
 
@@ -15,8 +13,11 @@ Solo se debe de correr en una terminal en la cual se pueda utilizar python.
 
 ## Salida
 
-Imprime en pantalla la descripción del FieldList "ECNO" y la descripción del LinkList de "protein_protein_small_genome".
-También, genera un archivo llamado "Ids_Constance_Auvynet.md" el cual es un archivo de texto plano con extensión md o MarkDown.
+Imprime en pantalla los IDs de los artículos que coinciden con el término de la búsqueda (limita sólo a 100 resultados). 
+
+También, genera un archivo llamado "Abstracts_Constance_Auvynet.md" el cual es un archivo de texto plano con extensión md o MarkDown en el cual se recopilan los abstracts de los artículos que concidieron con la búsqueda.
+
+Además, extrae los IDs de artículos citantes y los almacena en una lista llamada "Citations_Constance_Auvynet.txt", el cual es un archivo de texto plano con extensión txt.
 
 ## Pruebas
 
