@@ -8,7 +8,14 @@ Carlos García González <email: carlosgg@lcg.unam.mx>
 
 ## Descripción del Problema
 
+El programa tiene como objetivo buscar y recuperar información sobre proteínas específicas en la base de datos de NCBI utilizando el 
+módulo Bio.Entrez de Biopython. Más específicamente:
 
+Búsqueda de Proteínas: El problema que resuelve el programa es encontrar el ID de una proteína para un gen específico en una base de datos de proteínas, 
+en este caso, utilizando términos de búsqueda relacionados con el gen DEFA en Aedes aegypti.
+
+Recuperación de Información: Una vez que se encuentra el ID de la proteína, el programa extrae el registro completo de esa proteína desde la base de 
+datos de proteínas (en formato GenBank). Esto incluye detalles como la secuencia de la proteína, anotaciones y otras informaciones relevantes.
 
 
 ## Especificación de Requisitos
