@@ -1,6 +1,6 @@
-# E.search
+# Buscar el accesion de UniProt
 
-Fecha: 10/08/2024
+Fecha: 26/08/2024
 
 **Participantes**
 Carlos García González <email: carlosgg@lcg.unam.mx>
@@ -8,8 +8,7 @@ Carlos García González <email: carlosgg@lcg.unam.mx>
 
 ## Descripción del Problema
 
-El tiempo al momento de hacer una consulta en una base de datos es crucial, ya que, si bien no es mucho, se puede optimizar cuando se tienen que realizar muchas, por lo cual se desarrollo este script, tiene la finalidad de que se 
-puedan hacer las cosultas de una manera más rapida y ágil.
+
 
 
 ## Especificación de Requisitos
@@ -26,23 +25,23 @@ Para resolver este problema, se utilizarán varias funciones incorporadas en Pyt
 
 '''
 from Bio import Entrez
-from pprint import pprint  # Mejor visualización de diccionarios
+from pprint import pprint
+
 Entrez.email = "carlosgg@lcg.unam.mx"
 
-handle = Entrez.einfo(db="pubmed")
+handle = Entrez.esearch(db = "protein", term = "DEFA[Aedes aegypti]")
 record = Entrez.read(handle)
 
-for field in record["DbInfo"]["FieldList"]:
-    print(field["Name"] + "," + field["FullName"] + "," + field["Description"])
+print("Lista de Id's la informacion del gen DEFA del mosquito en la db de protein: ")
+print(record["IdList"])
 
-print("\nURL de la consulta:", handle.url)
+prot_id = record["IdList"][0]
 
-primer_campo = record['DbInfo']['FieldList'][0]
-print("\nDescripción del primer campo:")
-print(primer_campo["Description"])
-
+handle = Entrez.efetch(db = "protein", id = prot_id, rettype = "gb", retmode = "text")
+genbank_record = handle.read()
 handle.close()
 
+print(genbank_record)
 '''
 
 
