@@ -32,7 +32,7 @@ USAGE
         
         Para poder correr este porgrama se necesita que tanto el programa, como los archivo
         "opuntia1.fasta" y "opuntia.fasta", se encuentren en el mismo directorio, puede
-        ser en "Descargas", "Escritorio" o donde usted guste.
+        ser en "Descargas", "Escritorio" o donde usted, usuario, guste.
     
 
 ARGUMENTS
