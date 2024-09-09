@@ -1,22 +1,26 @@
-# Buscar el accesion de UniProt
+# BLAST
 
-Este script de Python tiene dos funciones, utilizando las bibliotecas de "Biopython" y el módulo "Entrez" 
-para interactuar con la base de datos "Protein" del NCBI. La primera función realiza una búsqueda para
-encontrar proteínas relacionadas al gen DEFA en el mosquiro Aedes aegypti
-e imprime en pantalla los IDs que coinciden con el término de la búsqueda.
+Este script de Python tiene dos funciones, utilizando la biblioteca
+de "Biopython" y los módulos "SeqIO", "NCBIWWW" y "NCBIXML" para interactuar
+con la base de datos "nr" del NCBI. La primera función carga un archivo fasta 
+que contiene una única secuencia, después realiza una busqueda BLAST en la base 
+de datos nr y por último filtra y muestra alineamientos cuyo valor E es menor que 0.05.
 
-La segunda función selecciona el primer ID y realiza una búsqueda en 
-"GeneBank" e imprime información detallada acerca de esta.
+La segunda función también carga un archivo fasta, pero este, a diferencia del primero,
+contiene multiples secuencias, para cada secuencia, realiza una búsqueda BLAST y encuentra
+el alineamiento con el mejor score y cuyo valor E sea menor que 0.05.
+Si encuentra un alineamiento significativo, imprime sus detalles. Si no, informa que no hay
+alineamientos con un valor E dentro del umbral.
 
 ## Uso
 
-Solo se debe de correr en una terminal que use python.
+Se debe de correr en una terminal que use python, y además el programa debe de estar en la  misma carpeta que los archivos opuntia1.fasta y opuntia.fasta
 
 ## Salida
 
-Imprime en pantalla los Id's relacionados al gen DEFA del mosquito *Aedes aegypti* que se encontraron 
-en la base de datos de protein.
-Después, imprime también en pantalla el GenBak de la proteina codificada por dicho gen.
+Imprime en pantalla los alineamientos más significativos que encontro, estos alineamientos
+tienen un E value menor a .05, la secuencia query es obtenida por medio de los archivos opuntia1.fasta y opuntia.
+
 
 ## Pruebas
 
